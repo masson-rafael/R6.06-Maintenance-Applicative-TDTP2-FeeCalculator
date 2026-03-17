@@ -9,21 +9,31 @@ public class FeeCalculator {
 
         // calculate price for adults
         if (visitor.age > 14) {
-            if (TicketType.HALF_DAY == ticketType) {
-                fee = ADULT_PRICE_BASE * 0.6;
-            } else if (TicketType.FULL_DAY == ticketType) {
-                fee = ADULT_PRICE_BASE * 1.2;
-            }
+            fee = calculateAdultFee(ticketType, fee);
         }
 
         // calculate price for children
         if (visitor.age <= 14) {
-            if (TicketType.HALF_DAY == ticketType) {
-                fee = CHILD_PRICE_BASE * 0.2;
-            } else if (TicketType.FULL_DAY == ticketType) {
-                fee = CHILD_PRICE_BASE * 0.5;
-            }
+            fee = calculateChildFee(ticketType, fee);
         }
         return fee;
+    }
+
+    private static double calculateAdultFee(TicketType ticketType, double fee) {
+        if (TicketType.HALF_DAY == ticketType) {
+            return (ADULT_PRICE_BASE * 0.6);
+        } else if (TicketType.FULL_DAY == ticketType) {
+            return (ADULT_PRICE_BASE * 1.2);
+        }
+        throw (new IllegalArgumentException("TicketType not supported"));
+    }
+
+    private static double calculateChildFee(TicketType ticketType, double fee) {
+        if (TicketType.HALF_DAY == ticketType) {
+            return (CHILD_PRICE_BASE * 0.2);
+        } else if (TicketType.FULL_DAY == ticketType) {
+            return (CHILD_PRICE_BASE * 0.5);
+        }
+        throw (new IllegalArgumentException("TicketType not supported"));
     }
 }
