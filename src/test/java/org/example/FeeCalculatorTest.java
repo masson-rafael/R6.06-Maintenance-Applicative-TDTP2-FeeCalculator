@@ -2,6 +2,7 @@ package org.example;
 
 import org.junit.jupiter.api.Test;
 
+import static org.assertj.core.api.Assertions.catchException;
 import static org.junit.jupiter.api.Assertions.*;
 import static org.assertj.core.api.Assertions.assertThat;
 
@@ -59,7 +60,35 @@ class FeeCalculatorTest {
         assertThat(actualFee).isEqualTo(120.0);
     }
 
-    //void devrait_produire_erreur_pour_adult_typeTicket_invalide()
-    //void devrait_produire_erreur_pour_child_typeTicket_invalide()
+    @Test
+    public void devrait_produire_erreur_pour_adult_typeTicket_invalide()
+    {
+        //GIVEN
+        Visitor adult = new Visitor(20);
 
+        // WHEN
+        IllegalArgumentException erreur = (IllegalArgumentException)catchException (()->FeeCalculator.calculateFee(adult, TicketType.WEEK) );
+
+        // THEN
+        assertThat(erreur)
+                .isNotNull()
+                .isInstanceOf(IllegalArgumentException.class)
+                .hasMessage("TicketType not supported");
+    }
+
+    @Test
+    public void devrait_produire_erreur_pour_child_typeTicket_invalide()
+    {
+        //GIVEN
+        Visitor child = new Visitor(10);
+
+        // WHEN
+        IllegalArgumentException erreur = (IllegalArgumentException)catchException (()->FeeCalculator.calculateFee(child, TicketType.WEEK) );
+
+        // THEN
+        assertThat(erreur)
+                .isNotNull()
+                .isInstanceOf(IllegalArgumentException.class)
+                .hasMessage("TicketType not supported");
+    }
 }
