@@ -1,8 +1,9 @@
 package org.example;
 
-public class AdultFeeStrategy {
+public class AdultFeeStrategy implements FeeStrategy {
     private static final double ADULT_PRICE_BASE = 100;
 
+    @Override
     public double calculate(TicketType ticketType) {
         if (TicketType.HALF_DAY == ticketType) {
             return (ADULT_PRICE_BASE * 0.6);
