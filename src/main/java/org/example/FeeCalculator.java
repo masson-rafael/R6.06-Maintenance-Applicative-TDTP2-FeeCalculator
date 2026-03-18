@@ -7,12 +7,12 @@ public class FeeCalculator {
 
         // calculate price for adults
         if (visitor.age > 14) {
-            fee = new AdultFeeStrategy().calculateAdultFee(ticketType);
+            fee = new AdultFeeStrategy().calculate(ticketType);
         }
 
         // calculate price for children
         if (visitor.age <= 14) {
-            fee = new ChildFeeStrategy().calculateChildFee(ticketType);
+            fee = new ChildFeeStrategy().calculate(ticketType);
         }
         return fee;
     }

@@ -3,7 +3,7 @@ package org.example;
 public class AdultFeeStrategy {
     private static final double ADULT_PRICE_BASE = 100;
 
-    public double calculateAdultFee(TicketType ticketType) {
+    public double calculate(TicketType ticketType) {
         if (TicketType.HALF_DAY == ticketType) {
             return (ADULT_PRICE_BASE * 0.6);
         } else if (TicketType.FULL_DAY == ticketType) {
