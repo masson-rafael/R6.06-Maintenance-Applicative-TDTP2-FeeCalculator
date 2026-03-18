@@ -15,6 +15,6 @@ public class AdultFeeStrategy implements FeeStrategy {
 
     @Override
     public boolean accept(Visitor visitor) {
-        return (visitor.getAge() > 14);
+        return (visitor.getAge() > ADULT_EXCULSIVE_LIMIT);
     }
 }
